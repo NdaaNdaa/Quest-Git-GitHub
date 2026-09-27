@@ -1,7 +1,32 @@
 body { 
     font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
 }
 
-h1 {
-    color: blue;
+h2 {
+    border-bottom: 3px solid #0d6efd;
+    padding-bottom: 10px;
+    padding-top: 15px;
+    color: #212529;
+}
+
+table {
+    border: 1px solid #dee2e6;
+    background-color: #ffffff;
+}
+
+th {
+    background-color: #e9ecef !important;
+    border: 1px solid #dee2e6 !important;
+}
+
+td {
+    border: 1px solid #dee2e6 !important;
+}
+
+.ipk th,
+.ipk td {
+    background-color: #e7f5ff !important;
+    color: #0d6efd !important;
+    font-weight: bold;
 }
