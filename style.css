@@ -30,3 +30,7 @@ td {
     color: #0d6efd !important;
     font-weight: bold;
 }
+
+.sembunyikan {
+    display: none;
+}

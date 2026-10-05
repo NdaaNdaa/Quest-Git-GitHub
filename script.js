@@ -31,7 +31,7 @@ const daftarMataKuliah = [
     nilai: "A"
 },
     {
-    kode: "14823274",
+    kode: "14823153",
     nama: "Teknologi Informasi dan Aplikasi Bisnis Berkembang",
     nilai: "AB"
 },
@@ -75,7 +75,7 @@ const daftarMataKuliah = [
     nama: "Konsep dan Fondasi Sistem Informasi",
     nilai: "AB"
 }
-]
+];
 
 function hitungJumlahMatkul(data) {
     return data.length;
@@ -105,3 +105,140 @@ function cariNilaiBagus(matkul) {
 
 const hasilCari = cariMataKuliah(daftarMataKuliah, "14823274")
 console.log(cariNilaiBagus(hasilCari)); 
+
+const tabelMataKuliah = document.getElementById("tabelMataKuliah");
+
+function tampilkanMataKuliah(data) {
+    tabelMataKuliah.innerHTML = "";
+
+    data.forEach((matkul, index) => {
+        const baris = document.createElement("tr");
+
+        const kolomNo = document.createElement("td");
+        kolomNo.textContent = index + 1;
+        kolomNo.classList.add("text-center");
+
+        const kolomKode = document.createElement("td");
+        kolomKode.textContent = matkul.kode;
+        kolomKode.classList.add("text-center");
+
+        const kolomNama = document.createElement("td");
+        kolomNama.textContent = matkul.nama;
+
+        const kolomNilai = document.createElement("td");
+        kolomNilai.textContent = matkul.nilai;
+        kolomNilai.classList.add("text-center", "fw-bold");
+
+        baris.appendChild(kolomNo);
+        baris.appendChild(kolomKode);
+        baris.appendChild(kolomNama);
+        baris.appendChild(kolomNilai);
+
+        tabelMataKuliah.appendChild(baris);
+    });
+}
+
+tampilkanMataKuliah(daftarMataKuliah);
+
+const inputCari = document.getElementById("inputCari");
+
+inputCari.addEventListener("input", function () {
+    const kataKunci = inputCari.value.toLowerCase();
+
+    const hasilPencarian = daftarMataKuliah.filter(function (matkul) {
+        return matkul.nama.toLowerCase().includes(kataKunci);
+    });
+
+    tampilkanMataKuliah(hasilPencarian);
+});
+
+const pesanHasil = document.getElementById("pesanHasil");
+
+inputCari.addEventListener("input", function () {
+    const kataKunci = inputCari.value.toLowerCase();
+
+    const hasilPencarian = daftarMataKuliah.filter(function (matkul) {
+        return matkul.nama.toLowerCase().includes(kataKunci);
+    });
+
+    tampilkanMataKuliah(hasilPencarian);
+
+    if (hasilPencarian.length === 0) {
+        pesanHasil.textContent = "Mata kuliah tidak ditemukan.";
+        pesanHasil.classList.remove("d-none");
+    } else {
+        pesanHasil.classList.add("d-none");
+    }
+});
+
+const btnToggle = document.getElementById("btnToggle");
+
+btnToggle.addEventListener("click", function () {
+    tabelMataKuliah.classList.toggle("sembunyikan");
+
+    if (tabelMataKuliah.classList.contains("sembunyikan")) {
+        btnToggle.textContent = "Tampilkan Tabel";
+    } else {
+        btnToggle.textContent = "Sembunyikan Tabel";
+    }
+});
+
+const formMatkul = document.getElementById("formMatkul");
+
+const inputKode = document.getElementById("inputKode");
+const inputNama = document.getElementById("inputNama");
+const inputNilai = document.getElementById("inputNilai");
+
+const pesanForm = document.getElementById("pesanForm");
+
+
+formMatkul.addEventListener("submit", function (event) {
+
+    event.preventDefault();
+
+    const kode = inputKode.value.trim();
+    const nama = inputNama.value.trim();
+    const nilai = inputNilai.value;
+
+    if (kode === "" || nama === "" || nilai === "") {
+
+        pesanForm.textContent = "Semua data harus diisi.";
+        pesanForm.classList.remove("d-none");
+        pesanForm.classList.remove("pesan-sukses");
+        pesanForm.classList.add("pesan-error");
+
+        return;
+    }
+
+    const kodeSudahAda = daftarMataKuliah.some(function (matkul) {
+        return matkul.kode === kode;
+    });
+
+    if (kodeSudahAda) {
+
+        pesanForm.textContent = "Kode mata kuliah sudah digunakan.";
+        pesanForm.classList.remove("d-none");
+        pesanForm.classList.remove("pesan-sukses");
+        pesanForm.classList.add("pesan-error");
+
+        return;
+    }
+
+    const mataKuliahBaru = {
+        kode: kode,
+        nama: nama,
+        nilai: nilai
+    };
+
+    daftarMataKuliah.push(mataKuliahBaru);
+
+    tampilkanMataKuliah(daftarMataKuliah);
+
+    pesanForm.textContent = "Mata kuliah berhasil ditambahkan!";
+    pesanForm.classList.remove("d-none");
+    pesanForm.classList.remove("pesan-error");
+    pesanForm.classList.add("pesan-sukses");
+
+    formMatkul.reset();
+});
+
