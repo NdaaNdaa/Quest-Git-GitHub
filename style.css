@@ -1,8 +1,10 @@
-body { 
+/* Mengatur font dan warna latar belakang halaman. */
+body {
     font-family: Arial, sans-serif;
     background-color: #f8f9fa;
 }
 
+/* Memberikan garis bawah dan jarak pada judul bagian. */
 h2 {
     border-bottom: 3px solid #0d6efd;
     padding-bottom: 10px;
@@ -10,6 +12,7 @@ h2 {
     color: #212529;
 }
 
+/* Mengatur tampilan dasar tabel dan garis pembatas. */
 table {
     border: 1px solid #dee2e6;
     background-color: #ffffff;
@@ -24,13 +27,26 @@ td {
     border: 1px solid #dee2e6 !important;
 }
 
-.ipk th,
-.ipk td {
-    background-color: #e7f5ff !important;
-    color: #0d6efd !important;
-    font-weight: bold;
+/* Memberikan warna khusus pada teks dan latar IPK. */
+.ipk-box h1 {
+    color: #0d6efd;
 }
 
+/* Menyembunyikan tabel ketika class ini aktif. */
 .sembunyikan {
     display: none;
+}
+
+/* Menyembunyikan pesan pencarian pada awal halaman. */
+#pesanHasil {
+    display: none;
+}
+
+/* Membedakan pesan validasi gagal dan berhasil. */
+.pesan-error {
+    color: #dc3545;
+}
+
+.pesan-sukses {
+    color: #198754;
 }

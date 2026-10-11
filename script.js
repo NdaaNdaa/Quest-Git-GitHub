@@ -1,80 +1,80 @@
 
 const daftarMataKuliah = [
     {
-    kode: "14823393",
-    nama: "Interaksi Manusia dan Komputer",
-    nilai: "A"
-},
-{
-    kode: "14823372",
-    nama: "Statistika dan Probabilitas",
-    nilai: "AB"
-},
+        kode: "14823393",
+        nama: "Interaksi Manusia dan Komputer",
+        nilai: "A"
+    },
     {
-    kode: "14823333",
-    nama: "Algoritma dan Struktur Data",
-    nilai: "A"
-},
+        kode: "14823372",
+        nama: "Statistika dan Probabilitas",
+        nilai: "AB"
+    },
     {
-    kode: "14823313",
-    nama: "Sistem Basis Data",
-    nilai: "A"
-},
+        kode: "14823333",
+        nama: "Algoritma dan Struktur Data",
+        nilai: "A"
+    },
     {
-    kode: "14823274",
-    nama: "Pemrograman Berorientasi Objek",
-    nilai: "A"
-},
+        kode: "14823313",
+        nama: "Sistem Basis Data",
+        nilai: "A"
+    },
     {
-    kode: "14823192",
-    nama: "Arsitektur dan Organisasi Komputer",
-    nilai: "A"
-},
+        kode: "14823274",
+        nama: "Pemrograman Berorientasi Objek",
+        nilai: "A"
+    },
     {
-    kode: "14823153",
-    nama: "Teknologi Informasi dan Aplikasi Bisnis Berkembang",
-    nilai: "AB"
-},
+        kode: "14823192",
+        nama: "Arsitektur dan Organisasi Komputer",
+        nilai: "A"
+    },
     {
-    kode: "14823342",
-    nama: "Aljabar Linear",
-    nilai: "AB"
-},
+        kode: "14823153",
+        nama: "Teknologi Informasi dan Aplikasi Bisnis Berkembang",
+        nilai: "AB"
+    },
     {
-     kode: "14823012",
-    nama: "Etika Pengembangan Teknologi Siber",
-    nilai: "A"
-},
+        kode: "14823342",
+        nama: "Aljabar Linear",
+        nilai: "AB"
+    },
     {
-     kode: "14823323",
-    nama: "Dasar Pemrograman**",
-    nilai: "A"
-},
+        kode: "14823012",
+        nama: "Etika Pengembangan Teknologi Siber",
+        nilai: "A"
+    },
     {
-     kode: "14823532",
-    nama: "Bahasa Inggris",
-    nilai: "A"
-},
+        kode: "14823323",
+        nama: "Dasar Pemrograman**",
+        nilai: "A"
+    },
     {
-     kode: "14823362",
-    nama: "Kalkulus",
-    nilai: "B"
-},
+        kode: "14823532",
+        nama: "Bahasa Inggris",
+        nilai: "A"
+    },
     {
-     kode: "14823352",
-    nama: "Matematika Diskrit",
-    nilai: "AB"
-},
+        kode: "14823362",
+        nama: "Kalkulus",
+        nilai: "B"
+    },
     {
-     kode: "14823202",
-    nama: "Sistem Operasi",
-    nilai: "AB"
-},
+        kode: "14823352",
+        nama: "Matematika Diskrit",
+        nilai: "AB"
+    },
     {
-     kode: "14823103",
-    nama: "Konsep dan Fondasi Sistem Informasi",
-    nilai: "AB"
-}
+        kode: "14823202",
+        nama: "Sistem Operasi",
+        nilai: "AB"
+    },
+    {
+        kode: "14823103",
+        nama: "Konsep dan Fondasi Sistem Informasi",
+        nilai: "AB"
+    }
 ];
 
 function hitungJumlahMatkul(data) {
@@ -104,7 +104,7 @@ function cariNilaiBagus(matkul) {
 }
 
 const hasilCari = cariMataKuliah(daftarMataKuliah, "14823274")
-console.log(cariNilaiBagus(hasilCari)); 
+console.log(cariNilaiBagus(hasilCari));
 
 const tabelMataKuliah = document.getElementById("tabelMataKuliah");
 
@@ -141,42 +141,40 @@ function tampilkanMataKuliah(data) {
 tampilkanMataKuliah(daftarMataKuliah);
 
 const inputCari = document.getElementById("inputCari");
-
-inputCari.addEventListener("input", function () {
-    const kataKunci = inputCari.value.toLowerCase();
-
-    const hasilPencarian = daftarMataKuliah.filter(function (matkul) {
-        return matkul.nama.toLowerCase().includes(kataKunci);
-    });
-
-    tampilkanMataKuliah(hasilPencarian);
-});
-
 const pesanHasil = document.getElementById("pesanHasil");
 
 inputCari.addEventListener("input", function () {
-    const kataKunci = inputCari.value.toLowerCase();
+    // Mengambil kata kunci dan mengubahnya menjadi huruf kecil.
+    const kataKunci = inputCari.value.trim().toLowerCase();
 
+    // Memfilter mata kuliah berdasarkan nama.
     const hasilPencarian = daftarMataKuliah.filter(function (matkul) {
         return matkul.nama.toLowerCase().includes(kataKunci);
     });
 
+    // Menampilkan hasil pencarian pada tabel.
     tampilkanMataKuliah(hasilPencarian);
 
-    if (hasilPencarian.length === 0) {
+    // Menampilkan pesan menggunakan animasi jQuery.
+    if (hasilPencarian.length === 0 && kataKunci !== "") {
         pesanHasil.textContent = "Mata kuliah tidak ditemukan.";
-        pesanHasil.classList.remove("d-none");
+        $(pesanHasil).stop(true, true).fadeIn(200);
     } else {
-        pesanHasil.classList.add("d-none");
+        $(pesanHasil).stop(true, true).fadeOut(200);
     }
 });
 
+const wadahTabelMataKuliah =
+    document.getElementById("wadahTabelMataKuliah");
+
 const btnToggle = document.getElementById("btnToggle");
 
-btnToggle.addEventListener("click", function () {
-    tabelMataKuliah.classList.toggle("sembunyikan");
+wadahTabelMataKuliah.classList.toggle("sembunyikan");
 
-    if (tabelMataKuliah.classList.contains("sembunyikan")) {
+btnToggle.addEventListener("click", function () {
+    wadahTabelMataKuliah.classList.toggle("sembunyikan");
+
+    if (wadahTabelMataKuliah.classList.contains("sembunyikan")) {
         btnToggle.textContent = "Tampilkan Tabel";
     } else {
         btnToggle.textContent = "Sembunyikan Tabel";
